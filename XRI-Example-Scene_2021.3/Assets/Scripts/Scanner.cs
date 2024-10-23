@@ -76,7 +76,8 @@ public class Scanner : XRGrabInteractable
         {
             worldHit = hit.point;
             targetName.SetText(hit.collider.name); 
-            targetPosition.SetText(hit.collider.transform.position.ToString()); 
+            targetPosition.SetText(hit.collider.transform.position.ToString());
+           // Debug.Log("Hit: " + hit.transform.position);
         }
         laserRenderer.SetPosition(1, laserRenderer.transform.InverseTransformPoint(worldHit));
     }

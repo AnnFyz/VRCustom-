@@ -123,13 +123,15 @@ namespace Unity.XRContent.Interaction
             m_OnValueChange.Invoke(m_Value);
         }
 
-        void OnDrawGizmosSelected()
+        void OnDrawGizmos()
         {
             var sliderMinPoint = transform.TransformPoint(new Vector3(0.0f, 0.0f, m_MinPosition));
             var sliderMaxPoint = transform.TransformPoint(new Vector3(0.0f, 0.0f, m_MaxPosition));
 
             Gizmos.color = Color.green;
             Gizmos.DrawLine(sliderMinPoint, sliderMaxPoint);
+            Gizmos.DrawSphere(sliderMinPoint, 0.01f);
+            Gizmos.DrawSphere(sliderMaxPoint, 0.01f);
         }
 
         void OnValidate()
