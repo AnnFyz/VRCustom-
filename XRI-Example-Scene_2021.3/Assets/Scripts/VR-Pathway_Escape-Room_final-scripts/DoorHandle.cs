@@ -53,6 +53,7 @@ namespace FinalExample
             if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Fixed && isSelected)
             {
                 var interactorTransform = firstInteractorSelecting.GetAttachTransform(this);
+                Debug.Log("GetAttachTransform");
 
                 //we get the vector that goes from this to the interactor
                 Vector3 selfToInteractor = interactorTransform.position - transform.position;
@@ -79,12 +80,12 @@ namespace FinalExample
 
                 // ================== EXTENSION FOR THE VISUAL LINE ==========================
 
-                handleToHandLine.SetPosition(0, transform.position);
-                handleToHandLine.SetPosition(1, interactorTransform.position);
+                //handleToHandLine.SetPosition(0, transform.position);
+                //handleToHandLine.SetPosition(1, interactorTransform.position);
 
-                //to be sure to see it we offset it a bit back on x so it is not IN the door 
-                dragVectorLine.SetPosition(0, transform.position);
-                dragVectorLine.SetPosition(1, transform.position + forceInDirectionOfDrag * m_WorldDragDirection);
+                ////to be sure to see it we offset it a bit back on x so it is not IN the door 
+                //dragVectorLine.SetPosition(0, transform.position);
+                //dragVectorLine.SetPosition(1, transform.position + forceInDirectionOfDrag * m_WorldDragDirection);
 
                 // ===========================================================================
             }
@@ -112,7 +113,7 @@ namespace FinalExample
 
         protected override void OnSelectExited(SelectExitEventArgs args)
         {
-            base.OnSelectExited(args);
+           base.OnSelectExited(args);
 
             handleToHandLine.gameObject.SetActive(false);
             dragVectorLine.gameObject.SetActive(false);

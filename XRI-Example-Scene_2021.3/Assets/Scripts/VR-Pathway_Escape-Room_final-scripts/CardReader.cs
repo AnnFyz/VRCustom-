@@ -32,12 +32,16 @@ namespace FinalExample
 
         public override bool CanHover(IXRHoverInteractable interactable)
         {
+
             //if out interactable isn't of Keycard type, we ignore it, we are only interested in Keycard.
+            bool isValid = interactable is Keycard;
+            Debug.Log("interactable is Keycard: " + isValid);
             return interactable is Keycard;
         }
 
         protected override void OnHoverEntered(HoverEnterEventArgs args)
         {
+            Debug.Log("OnHoverEntered");
             base.OnHoverEntered(args);
 
             m_KeycardTransform = args.interactableObject.transform;
@@ -59,6 +63,7 @@ namespace FinalExample
             {
                 visualLockToHide.gameObject.SetActive(false);
                 handleToEnable.enabled = true;
+                Debug.Log("handleToEnable.enabled");
             }
 
             //we just moved out, we set back our keycard transform to null so Update know there is no more keycard to check
@@ -69,8 +74,10 @@ namespace FinalExample
         {
             //only if we currently have a card hovering us. We stored that value in OnHoverEntered and set it to null in
             //OnHoverExit
+       
             if (m_KeycardTransform != null)
             {
+                Debug.Log("m_KeycardTransform");
                 //the way our model is made (flat on a surface), the blue vector (z, forward) is the "up" of the card, it
                 //should be pointing up when the card is in the right orientation
                 Vector3 keycardUp = m_KeycardTransform.forward;

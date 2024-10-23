@@ -29,13 +29,28 @@ namespace FinalExample
 
         public override bool IsHoverableBy(IXRHoverInteractor interactor)
         {
-            return base.IsHoverableBy(interactor) && (interactor is XRDirectInteractor);
+            return base.IsHoverableBy(interactor); //&& (interactor is XRDirectInteractor);
         }
 
-        protected override void OnHoverEntered(HoverEnterEventArgs args)
-        {
-            base.OnHoverEntered(args);
+        //protected override void OnHoverEntered(HoverEnterEventArgs args)
+        //{
+        //    base.OnHoverEntered(args);
 
+        //    //we only want to change for the first interactor that touch (e.g. if we touch with a second hand when one is
+        //    //already touching the button, no need to change the data again)
+        //    if (m_NumberOfInteractor == 0)
+        //    {
+        //        m_RendererToChange.material = touchedMaterial;
+
+        //        linkedNumberpad.ButtonPressed(buttonNumber);
+        //    }
+
+        //    m_NumberOfInteractor += 1;
+        //}
+
+        protected override void OnSelectEntered(SelectEnterEventArgs args)
+        {
+            base.OnSelectEntered(args);
             //we only want to change for the first interactor that touch (e.g. if we touch with a second hand when one is
             //already touching the button, no need to change the data again)
             if (m_NumberOfInteractor == 0)
@@ -48,10 +63,9 @@ namespace FinalExample
             m_NumberOfInteractor += 1;
         }
 
-        protected override void OnHoverExited(HoverExitEventArgs args)
+        protected override void OnSelectExited(SelectExitEventArgs args)
         {
-            base.OnHoverExited(args);
-
+            base.OnSelectExited(args);
             m_NumberOfInteractor -= 1;
 
             //if we have multiple interactor touching that (e.g. 2 hands) then this will be called when only one is removed.
@@ -59,5 +73,17 @@ namespace FinalExample
             if (m_NumberOfInteractor == 0)
                 m_RendererToChange.material = normalMaterial;
         }
+
+        //protected override void OnHoverExited(HoverExitEventArgs args)
+        //{
+        //    base.OnHoverExited(args);
+
+        //    m_NumberOfInteractor -= 1;
+
+        //    //if we have multiple interactor touching that (e.g. 2 hands) then this will be called when only one is removed.
+        //    //we want to make sure we have nothing left hovering before returning it to "normal" state.
+        //    if (m_NumberOfInteractor == 0)
+        //        m_RendererToChange.material = normalMaterial;
+        //}
     }
 }
